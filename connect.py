@@ -10,7 +10,7 @@ PORT = 4063
 
 def connection_test(username, password, host=HOST, port=PORT, secure=False):
     print(f'connecting to {host}:{port} secure={secure}')
-    conn = BlitzGateway(username, password, host=host, port=port, secure=False)
+    conn = BlitzGateway(username, password, host=host, port=port, secure=secure)
     try:
         conn.connect()
         conn.close()
