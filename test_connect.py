@@ -1,9 +1,9 @@
 import os
 from connect import connection_test
 
-USERNAME = os.environ['OMERO_USERNAME']
-PASSWORD = os.environ['OMERO_PASSWORD']
-HOSTNAME = os.environ.get('hostname', 'pricaimcit.services.brown.edu')
+USERNAME = os.environ.get('OMERO_USERNAME', 'root')
+PASSWORD = os.environ.get('OMERO_PASSWORD', 'root')
+HOSTNAME = os.environ.get('hostname', 'tcp://localhost')
 
 def test_secure_connect():
     '''Connect on secure port should work'''

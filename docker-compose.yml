@@ -1,0 +1,37 @@
+version: '3.6'
+services:
+  omeroserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - '4063:4063'
+    - '4064:4064'
+    environment:
+      ROOTPASS: root
+      CONFIG_omero_db_user: omero
+      CONFIG_omero_db_pass: omero
+      CONFIG_omero_db_name: omero
+      CONFIG_omero_db_host: postgres
+  omeroweb:
+    image: openmicroscopy/omero-web-standalone:5.6.3
+    environment:
+      OMEROHOST: omeroserver
+      version: '3.6'
+      CONFIG_omero_web_debug: 'true'
+      CONFIG_omero_web_public_enabled: 'true'
+      CONFIG_omero_web_public_user: admin
+      CONFIG_omero_web_public_password: admin
+      CONFIG_omero_web_login__logo: https://placekitten.com/g/450/150
+    ports:
+    - '4080:4080'
+  postgres:
+    image: postgres:9.6.17
+    environment:
+      POSTGRES_PASSWORD: omero
+      POSTGRES_USER: omero
+      POSTGRES_DB: omero
+    volumes:
+    - 'db-data:/var/lib/postgres/data'
+volumes:
+  db-data:

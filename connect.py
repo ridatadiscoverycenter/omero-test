@@ -5,7 +5,7 @@ import logging
 import omero.clients
 from omero.gateway import BlitzGateway
 
-HOST = 'tcp://pricaimcit.services.brown.edu'
+HOST = 'tcp://localhost'
 PORT = 4063
 
 def connection_test(username, password, host=HOST, port=PORT, secure=False):
