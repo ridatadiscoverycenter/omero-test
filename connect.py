@@ -5,14 +5,12 @@ import logging
 import omero.clients
 from omero.gateway import BlitzGateway
 
-HOST = 'tcp://localhost'
+HOST = 'tcp://127.0.0.1'
 PORT = 4063
 
 def connection_test(username, password, host=HOST, port=PORT, secure=False):
     print(f'connecting to {host}:{port} secure={secure}')
-    client = omero.client(host=host, args=['--IceSSL.Trace.Security=1', '--Ice.Trace.Network=1', '--Ice.Trace.Protocol=1'])
-    session = client.createSession(username, password)
-    conn = BlitzGateway(client_obj=client)
+    conn = BlitzGateway(username, password, host=host, port=port, secure=secure)
     try:
         connected = conn.connect()
         conn.close()
